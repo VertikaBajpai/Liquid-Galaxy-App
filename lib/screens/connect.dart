@@ -17,8 +17,8 @@ class _ConnectScreenState extends State<ConnectScreen> {
   void initState() {
     super.initState();
     ssh = SSH();
-    saveSettings();
-    refresh();
+    // saveSettings();
+    // refresh();
   }
 
   void refresh() async {
@@ -40,31 +40,31 @@ class _ConnectScreenState extends State<ConnectScreen> {
   Future<void> saveSettings() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    if (ipController.text.isNotEmpty) {
+    if (ipController.text.isNotEmpty)
       await prefs.setString('ipAddress', ipController.text);
-    } else {
-      ipController.text = prefs.getString('ipAddress') ?? '';
-    }
-    if (usernameController.text.isNotEmpty) {
+    // } else {
+    //   ipController.text = prefs.getString('ipAddress') ?? '';
+    // }
+    if (usernameController.text.isNotEmpty)
       await prefs.setString('username', usernameController.text);
-    } else {
-      usernameController.text = prefs.getString('username') ?? '';
-    }
-    if (passwordController.text.isNotEmpty) {
+    // } else {
+    //   usernameController.text = prefs.getString('username') ?? '';
+    // }
+    if (passwordController.text.isNotEmpty)
       await prefs.setString('password', passwordController.text);
-    } else {
-      passwordController.text = prefs.getString('password') ?? '';
-    }
-    if (portController.text.isNotEmpty) {
+    // } else {
+    //   passwordController.text = prefs.getString('password') ?? '';
+    // }
+    if (portController.text.isNotEmpty)
       await prefs.setString('sshPort', portController.text);
-    } else {
-      portController.text = prefs.getString('sshPort') ?? '';
-    }
-    if (no_of_rigs_Controller.text.isNotEmpty) {
+    // } else {
+    //   portController.text = prefs.getString('sshPort') ?? '';
+    // }
+    if (no_of_rigs_Controller.text.isNotEmpty)
       await prefs.setString('numberOfRigs', no_of_rigs_Controller.text);
-    } else {
-      no_of_rigs_Controller.text = prefs.getString('numberOfRigs') ?? '';
-    }
+    // } else {
+    //   no_of_rigs_Controller.text = prefs.getString('numberOfRigs') ?? '';
+    // }
   }
 
   @override
@@ -322,6 +322,7 @@ class _ConnectScreenState extends State<ConnectScreen> {
 
                               if (connect == true) {
                                 setState(() {
+                                  refresh();
                                   connectionStatus = true;
                                 });
                               }

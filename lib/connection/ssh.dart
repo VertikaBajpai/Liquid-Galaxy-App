@@ -1,11 +1,9 @@
 import 'dart:async';
 import 'dart:io';
-
 import 'package:dartssh2/dartssh2.dart';
 import 'package:flutter/foundation.dart';
 import 'package:liquid_galaxy_kiss_app/kml/kml.dart';
 import 'package:liquid_galaxy_kiss_app/kml/kmlGenerator.dart';
-
 import 'package:liquid_galaxy_kiss_app/kml/mykml.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -120,7 +118,8 @@ class SSH {
           else
             echo $_passwordOrKey | sudo -S service \\\${SERVICE} restart
           fi
-          " && sshpass -p $_passwordOrKey ssh -x -t lg@lg$i "\$RELAUNCH_CMD\"""";
+          " && sshpass -p $_passwordOrKey ssh -x -t lg@lg$i "\$RELAUNCH_CMD\""""
+            "";
         await _client?.run(
             '"/home/$_username/bin/lg-relaunch" > /home/$_username/log.txt');
         await _client?.run(cmd);

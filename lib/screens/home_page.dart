@@ -31,7 +31,7 @@ class HomePageState extends State<HomePage> {
       if (!orbitPlaying) {
         break;
       }
-      print("first break!!");
+
       ssh.flyToOrbit(
           context, latitude, longitude, altitude, 1, 60, i.toDouble());
       await Future.delayed(const Duration(milliseconds: 1000));
@@ -39,7 +39,7 @@ class HomePageState extends State<HomePage> {
     if (!mounted) {
       return;
     }
-    print("Second break!!");
+
     ssh.flyTo(context, latitude, longitude, altitude, 1, 0, 0);
     setState(() {
       orbitPlaying = false;
@@ -54,10 +54,10 @@ class HomePageState extends State<HomePage> {
   }
 
   @override
-  void initState() {
+  void initState() async {
     super.initState();
     ssh = SSH();
-    _connectToLG();
+    await _connectToLG();
   }
 
   Future<void> _connectToLG() async {
@@ -86,8 +86,8 @@ class HomePageState extends State<HomePage> {
                           builder: (context) => const ConnectScreen(),
                         ),
                       );
-                      setState(() {
-                        _connectToLG();
+                      setState(() async {
+                        await _connectToLG();
                       });
                     },
                   ),
@@ -154,8 +154,8 @@ class HomePageState extends State<HomePage> {
                           children: [
                         Container(
                             padding: const EdgeInsets.all(10),
-                            height: 100,
-                            width: 300,
+                            height: 150,
+                            width: 350,
                             decoration: const BoxDecoration(
                               boxShadow: [
                                 BoxShadow(
@@ -175,12 +175,14 @@ class HomePageState extends State<HomePage> {
                                 ), //BoxShadow
                               ],
                               color: Color.fromRGBO(207, 238, 235, 1),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(25)),
                             ),
                             child: TextButton(
                                 child: const Text(
                                   'PRINT HTML BUBBLE',
                                   style: TextStyle(
-                                      fontSize: 20,
+                                      fontSize: 25,
                                       fontFamily: 'Serif',
                                       color: Colors.black),
                                 ),
@@ -190,8 +192,8 @@ class HomePageState extends State<HomePage> {
                         const SizedBox(width: 50),
                         Container(
                             padding: const EdgeInsets.all(10),
-                            height: 100,
-                            width: 300,
+                            height: 150,
+                            width: 350,
                             decoration: const BoxDecoration(
                               boxShadow: [
                                 BoxShadow(
@@ -208,15 +210,18 @@ class HomePageState extends State<HomePage> {
                                   offset: Offset(0.0, 0.0),
                                   blurRadius: 0.0,
                                   spreadRadius: 0.0,
-                                ), //BoxShadow
+                                ),
+                                //BoxShadow
                               ],
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(25)),
                               color: Color.fromRGBO(207, 238, 235, 1),
                             ),
                             child: TextButton(
                                 child: const Text(
                                   'CLEAN LOGO',
                                   style: TextStyle(
-                                      fontSize: 20,
+                                      fontSize: 25,
                                       fontFamily: 'Serif',
                                       color: Colors.black),
                                 ),
@@ -229,9 +234,9 @@ class HomePageState extends State<HomePage> {
 
   Widget Column1(BuildContext context) {
     return Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Color.fromARGB(255, 100, 126, 139),
-          boxShadow: const [
+          boxShadow: [
             BoxShadow(
               color: Color.fromARGB(255, 220, 217, 217),
               offset: Offset(
