@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:liquid_galaxy_kiss_app/utils/constants.dart';
 
 class ConnectionFlag extends StatelessWidget {
   bool connectionStatus;
-  ConnectionFlag({required this.connectionStatus});
+  ConnectionFlag({super.key, required this.connectionStatus});
 
   @override
   Widget build(BuildContext context) {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:liquid_galaxy_kiss_app/components/connection_flag.dart';
 import 'package:liquid_galaxy_kiss_app/connection/ssh.dart';
+import 'package:liquid_galaxy_kiss_app/utils/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ConnectScreen extends StatefulWidget {
@@ -17,19 +18,19 @@ class _ConnectScreenState extends State<ConnectScreen> {
   void initState() {
     super.initState();
     ssh = SSH();
-    // saveSettings();
+    saveSettings();
     // refresh();
   }
 
-  void refresh() async {
-    bool? connect = await ssh.connectToLG();
+  // void refresh() async {
 
-    if (connect == true) {
-      setState(() {
-        connectionStatus = true;
-      });
-    }
-  }
+  //   if (connect == true) {
+  //     setState(() {
+  //       print('Connected again');
+  //       connectionStatus = true;
+  //     });
+  //   }
+  // }
 
   final TextEditingController ipController = TextEditingController();
   final TextEditingController usernameController = TextEditingController();
@@ -40,31 +41,31 @@ class _ConnectScreenState extends State<ConnectScreen> {
   Future<void> saveSettings() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    if (ipController.text.isNotEmpty)
+    if (ipController.text.isNotEmpty) {
       await prefs.setString('ipAddress', ipController.text);
-    // } else {
-    //   ipController.text = prefs.getString('ipAddress') ?? '';
-    // }
-    if (usernameController.text.isNotEmpty)
+    } else {
+      ipController.text = prefs.getString('ipAddress') ?? '';
+    }
+    if (usernameController.text.isNotEmpty) {
       await prefs.setString('username', usernameController.text);
-    // } else {
-    //   usernameController.text = prefs.getString('username') ?? '';
-    // }
-    if (passwordController.text.isNotEmpty)
+    } else {
+      usernameController.text = prefs.getString('username') ?? '';
+    }
+    if (passwordController.text.isNotEmpty) {
       await prefs.setString('password', passwordController.text);
-    // } else {
-    //   passwordController.text = prefs.getString('password') ?? '';
-    // }
-    if (portController.text.isNotEmpty)
+    } else {
+      passwordController.text = prefs.getString('password') ?? '';
+    }
+    if (portController.text.isNotEmpty) {
       await prefs.setString('sshPort', portController.text);
-    // } else {
-    //   portController.text = prefs.getString('sshPort') ?? '';
-    // }
-    if (no_of_rigs_Controller.text.isNotEmpty)
+    } else {
+      portController.text = prefs.getString('sshPort') ?? '';
+    }
+    if (no_of_rigs_Controller.text.isNotEmpty) {
       await prefs.setString('numberOfRigs', no_of_rigs_Controller.text);
-    // } else {
-    //   no_of_rigs_Controller.text = prefs.getString('numberOfRigs') ?? '';
-    // }
+    } else {
+      no_of_rigs_Controller.text = prefs.getString('numberOfRigs') ?? '';
+    }
   }
 
   @override
@@ -322,7 +323,7 @@ class _ConnectScreenState extends State<ConnectScreen> {
 
                               if (connect == true) {
                                 setState(() {
-                                  refresh();
+                                  print('Connected');
                                   connectionStatus = true;
                                 });
                               }

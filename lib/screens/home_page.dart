@@ -54,10 +54,10 @@ class HomePageState extends State<HomePage> {
   }
 
   @override
-  void initState() async {
+  void initState() {
     super.initState();
     ssh = SSH();
-    await _connectToLG();
+    _connectToLG();
   }
 
   Future<void> _connectToLG() async {
