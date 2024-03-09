@@ -96,7 +96,7 @@ class HomePageState extends State<HomePage> {
                     onTap: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => AboutPage(),
+                          builder: (context) => const AboutPage(),
                         ),
                       );
                     },
@@ -110,126 +110,105 @@ class HomePageState extends State<HomePage> {
                   image: AssetImage("assets/images/space.png"),
                   fit: BoxFit.cover),
             ),
-            child: Container(
-                padding: const EdgeInsets.all(50),
-                width: double.infinity,
-                child: Column(children: [
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Column1(context),
-                        const SizedBox(
-                          width: 20,
-                        ),
-                        Column2(context)
-                      ]),
-                  const SizedBox(
-                    height: 100,
-                  ),
-                  Container(
-                      // height: 200,
-                      // width: 1200,
-                      // decoration: const BoxDecoration(
-                      //   color: Color.fromARGB(255, 100, 126, 139),
-                      //   boxShadow: [
-                      //     BoxShadow(
-                      //       color: Color.fromARGB(255, 220, 217, 217),
-                      //       offset: Offset(
-                      //         5.0,
-                      //         5.0,
-                      //       ),
-                      //       blurRadius: 10.0,
-                      //       spreadRadius: 2.0,
-                      //     ), //BoxShadow
-                      //     BoxShadow(
-                      //       color: Color.fromARGB(255, 125, 124, 124),
-                      //       offset: Offset(0.0, 0.0),
-                      //       blurRadius: 0.0,
-                      //       spreadRadius: 0.0,
-                      //     ), //BoxShadow
-                      //   ],
+            child: Expanded(
+                child: Container(
+                    padding: const EdgeInsets.all(10),
+                    child: Column(children: [
+                      Expanded(
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Column1(context),
+                              const SizedBox(
+                                width: 20,
+                              ),
+                              Column2(context)
+                            ]),
+                      ),
+                      // const SizedBox(
+                      //   height: 20,
                       // ),
-                      child: Row(
+                      Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                        Container(
-                            padding: const EdgeInsets.all(10),
-                            height: 150,
-                            width: 350,
-                            decoration: const BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black,
-                                  offset: Offset(
-                                    5.0,
-                                    5.0,
-                                  ),
-                                  blurRadius: 10.0,
-                                  spreadRadius: 2.0,
-                                ), //BoxShadow
-                                BoxShadow(
-                                  color: Colors.white,
-                                  offset: Offset(0.0, 0.0),
-                                  blurRadius: 0.0,
-                                  spreadRadius: 0.0,
-                                ), //BoxShadow
-                              ],
-                              color: Color.fromRGBO(207, 238, 235, 1),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(25)),
-                            ),
-                            child: TextButton(
-                                child: const Text(
-                                  'PRINT HTML BUBBLE',
-                                  style: TextStyle(
-                                      fontSize: 25,
-                                      fontFamily: 'Serif',
-                                      color: Colors.black),
+                            Container(
+                                padding: const EdgeInsets.all(10),
+                                height: 100,
+                                width: 350,
+                                decoration: const BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black,
+                                      offset: Offset(
+                                        5.0,
+                                        5.0,
+                                      ),
+                                      blurRadius: 10.0,
+                                      spreadRadius: 2.0,
+                                    ), //BoxShadow
+                                    BoxShadow(
+                                      color: Colors.white,
+                                      offset: Offset(0.0, 0.0),
+                                      blurRadius: 0.0,
+                                      spreadRadius: 0.0,
+                                    ), //BoxShadow
+                                  ],
+                                  color: Color.fromRGBO(207, 238, 235, 1),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(25)),
                                 ),
-                                onPressed: () async {
-                                  await ssh.renderInSlave(context);
-                                })),
-                        const SizedBox(width: 50),
-                        Container(
-                            padding: const EdgeInsets.all(10),
-                            height: 150,
-                            width: 350,
-                            decoration: const BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black,
-                                  offset: Offset(
-                                    5.0,
-                                    5.0,
-                                  ),
-                                  blurRadius: 10.0,
-                                  spreadRadius: 2.0,
-                                ), //BoxShadow
-                                BoxShadow(
-                                  color: Colors.white,
-                                  offset: Offset(0.0, 0.0),
-                                  blurRadius: 0.0,
-                                  spreadRadius: 0.0,
+                                child: TextButton(
+                                    child: const Text(
+                                      'PRINT HTML BUBBLE',
+                                      style: TextStyle(
+                                          fontSize: 25,
+                                          fontFamily: 'Serif',
+                                          color: Colors.black),
+                                    ),
+                                    onPressed: () async {
+                                      await ssh.renderInSlave(context);
+                                    })),
+                            const SizedBox(width: 50),
+                            Container(
+                                padding: const EdgeInsets.all(10),
+                                height: 100,
+                                width: 350,
+                                decoration: const BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black,
+                                      offset: Offset(
+                                        5.0,
+                                        5.0,
+                                      ),
+                                      blurRadius: 10.0,
+                                      spreadRadius: 2.0,
+                                    ), //BoxShadow
+                                    BoxShadow(
+                                      color: Colors.white,
+                                      offset: Offset(0.0, 0.0),
+                                      blurRadius: 0.0,
+                                      spreadRadius: 0.0,
+                                    ),
+                                    //BoxShadow
+                                  ],
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(25)),
+                                  color: Color.fromRGBO(207, 238, 235, 1),
                                 ),
-                                //BoxShadow
-                              ],
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(25)),
-                              color: Color.fromRGBO(207, 238, 235, 1),
-                            ),
-                            child: TextButton(
-                                child: const Text(
-                                  'CLEAN LOGO',
-                                  style: TextStyle(
-                                      fontSize: 25,
-                                      fontFamily: 'Serif',
-                                      color: Colors.black),
-                                ),
-                                onPressed: () async {
-                                  await ssh.cleanSlaves(context);
-                                })),
-                      ]))
-                ]))));
+                                child: TextButton(
+                                    child: const Text(
+                                      'CLEAN LOGO',
+                                      style: TextStyle(
+                                          fontSize: 25,
+                                          fontFamily: 'Serif',
+                                          color: Colors.black),
+                                    ),
+                                    onPressed: () async {
+                                      await ssh.cleanSlaves(context);
+                                    })),
+                          ])
+                    ])))));
   }
 
   Widget Column1(BuildContext context) {
@@ -254,13 +233,13 @@ class HomePageState extends State<HomePage> {
             ), //BoxShadow
           ],
         ),
+        height: 325,
         padding: const EdgeInsets.all(20),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Column(children: [
             Container(
                 padding: const EdgeInsets.all(10),
-                height: 100,
-                width: 300,
+                width: 250,
                 decoration: const BoxDecoration(
                   boxShadow: [
                     BoxShadow(
@@ -296,12 +275,12 @@ class HomePageState extends State<HomePage> {
           ]),
           Row(children: [
             const SizedBox(
-              width: 100,
+              width: 50,
             ),
             Container(
                 padding: const EdgeInsets.all(10),
-                height: 100,
-                width: 300,
+                // height: 100,
+                width: 250,
                 decoration: const BoxDecoration(
                   boxShadow: [
                     BoxShadow(
@@ -337,14 +316,14 @@ class HomePageState extends State<HomePage> {
           ]),
           Row(children: [
             const SizedBox(
-              width: 200,
+              width: 100,
             ),
             Container(
               padding: const EdgeInsets.all(20),
               child: Container(
                   padding: const EdgeInsets.all(10),
-                  height: 100,
-                  width: 300,
+                  // height: 100,
+                  width: 250,
                   decoration: const BoxDecoration(
                     boxShadow: [
                       BoxShadow(
@@ -381,7 +360,7 @@ class HomePageState extends State<HomePage> {
 
   Widget Column2(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Color.fromARGB(255, 100, 126, 139),
         boxShadow: [
           BoxShadow(
@@ -402,12 +381,12 @@ class HomePageState extends State<HomePage> {
         ],
       ),
       padding: const EdgeInsets.all(20),
+      height: 325,
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Column(children: [
           Container(
               padding: const EdgeInsets.all(10),
-              height: 100,
-              width: 300,
+              width: 250,
               decoration: const BoxDecoration(
                 boxShadow: [
                   BoxShadow(
@@ -437,17 +416,16 @@ class HomePageState extends State<HomePage> {
                     await ssh.relaunchLG();
                   })),
           const SizedBox(
-            height: 30,
+            height: 26,
           )
         ]),
         Row(children: [
           const SizedBox(
-            width: 100,
+            width: 50,
           ),
           Container(
               padding: const EdgeInsets.all(10),
-              height: 100,
-              width: 300,
+              width: 250,
               decoration: const BoxDecoration(
                 boxShadow: [
                   BoxShadow(
@@ -490,7 +468,7 @@ class HomePageState extends State<HomePage> {
                                       onPressed: () async {
                                         SSH ssh = SSH();
                                         await ssh.connectToLG();
-                                        ssh.rebootLG();
+                                        await ssh.rebootLG();
                                         Navigator.pop(context);
                                       },
                                       child: const Text('Reboot'),
@@ -508,14 +486,13 @@ class HomePageState extends State<HomePage> {
         ]),
         Row(children: [
           const SizedBox(
-            width: 200,
+            width: 100,
           ),
           Container(
               padding: const EdgeInsets.all(20),
               child: Container(
                   padding: const EdgeInsets.all(10),
-                  height: 100,
-                  width: 300,
+                  width: 250,
                   decoration: const BoxDecoration(
                     boxShadow: [
                       BoxShadow(
@@ -546,9 +523,6 @@ class HomePageState extends State<HomePage> {
                         await ssh.shutdownLG();
                       })))
         ]),
-        const SizedBox(
-          height: 20,
-        ),
       ]),
     );
   }

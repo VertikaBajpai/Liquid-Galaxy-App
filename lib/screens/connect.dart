@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:liquid_galaxy_kiss_app/components/connection_flag.dart';
 import 'package:liquid_galaxy_kiss_app/connection/ssh.dart';
@@ -323,7 +324,9 @@ class _ConnectScreenState extends State<ConnectScreen> {
 
                               if (connect == true) {
                                 setState(() {
-                                  print('Connected');
+                                  if (kDebugMode) {
+                                    print('Connected');
+                                  }
                                   connectionStatus = true;
                                 });
                               }

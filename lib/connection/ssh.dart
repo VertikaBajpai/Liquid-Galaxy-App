@@ -31,23 +31,24 @@ class SSH {
     await initConnection();
 
     try {
-      final socket = await SSHSocket.connect(_host, int.parse(_port),
-          timeout: Duration(seconds: 5));
+      final socket = await SSHSocket.connect(
+        _host,
+        int.parse(_port),
+      );
+
       _client = SSHClient(
         socket,
         username: _username,
         onPasswordRequest: () => _passwordOrKey,
       );
+      print(
+          'IP: $_host, port: $_port, username: $_username, noOfRigs: $_numberOfRigs');
       final sftp = await _client?.sftp();
       await sftp?.open('/var/www/html/connection.txt',
           mode: SftpFileOpenMode.create |
               SftpFileOpenMode.truncate |
               SftpFileOpenMode.write);
-      print("Sftp done");
-      if (kDebugMode) {
-        print(
-            'IP: $_host, port: $_port, username: $_username, noOfRigs: $_numberOfRigs');
-      }
+
       connection = true;
       return true;
     } on SocketException catch (e) {
