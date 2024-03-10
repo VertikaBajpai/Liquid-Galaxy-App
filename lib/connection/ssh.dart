@@ -35,6 +35,7 @@ class SSH {
         _host,
         int.parse(_port),
       );
+      print('Step 1 success');
 
       _client = SSHClient(
         socket,
@@ -48,7 +49,7 @@ class SSH {
           mode: SftpFileOpenMode.create |
               SftpFileOpenMode.truncate |
               SftpFileOpenMode.write);
-
+      print('Step 2 successful');
       connection = true;
       return true;
     } on SocketException catch (e) {
@@ -61,6 +62,7 @@ class SSH {
 
   Future<SSHSession?> searchplace(String place) async {
     try {
+      await connectToLG();
       if (_client == null) {
         if (kDebugMode) {
           print('SSH client is not initialized.');
@@ -68,7 +70,7 @@ class SSH {
         return null;
       }
       print('search place between');
-      await connectToLG();
+
       final execResult =
           await _client!.execute('echo "search=$place" >/tmp/query.txt');
       print('Search successful');
