@@ -36,19 +36,23 @@ class SSH {
         int.parse(_port),
       );
       print('Step 1 success');
+      bool isAuthenticated = false;
 
-      _client = SSHClient(
-        socket,
-        username: _username,
-        onPasswordRequest: () => _passwordOrKey,
-      );
+      _client = SSHClient(socket,
+          username: _username,
+          onPasswordRequest: () => _passwordOrKey,
+          onAuthenticated: () {
+            isAuthenticated = true;
+          },
+          keepAliveInterval: const Duration(seconds: 3600000000));
       print(
           'IP: $_host, port: $_port, username: $_username, noOfRigs: $_numberOfRigs');
-      final sftp = await _client?.sftp();
-      await sftp?.open('/var/www/html/connection.txt',
-          mode: SftpFileOpenMode.create |
-              SftpFileOpenMode.truncate |
-              SftpFileOpenMode.write);
+      await Future.delayed(const Duration(seconds: 10));
+      if (isAuthenticated) {
+        create_sftp();
+      } else {
+        throw Exception('SSH Authenication failed');
+      }
       print('Step 2 successful');
       connection = true;
       return true;
@@ -58,6 +62,14 @@ class SSH {
       }
       return false;
     }
+  }
+
+  create_sftp() async {
+    final sftp = await _client?.sftp();
+    await sftp?.open('/var/www/html/connection.txt',
+        mode: SftpFileOpenMode.create |
+            SftpFileOpenMode.truncate |
+            SftpFileOpenMode.write);
   }
 
   Future<SSHSession?> searchplace(String place) async {
