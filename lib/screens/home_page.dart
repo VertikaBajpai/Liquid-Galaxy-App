@@ -215,23 +215,23 @@ class HomePageState extends State<HomePage> {
     return Container(
         decoration: const BoxDecoration(
           color: Color.fromARGB(255, 100, 126, 139),
-          boxShadow: [
-            BoxShadow(
-              color: Color.fromARGB(255, 220, 217, 217),
-              offset: Offset(
-                5.0,
-                5.0,
-              ),
-              blurRadius: 10.0,
-              spreadRadius: 2.0,
-            ), //BoxShadow
-            BoxShadow(
-              color: Color.fromARGB(255, 125, 124, 124),
-              offset: Offset(0.0, 0.0),
-              blurRadius: 0.0,
-              spreadRadius: 0.0,
-            ), //BoxShadow
-          ],
+          // boxShadow: [
+          //   BoxShadow(
+          //     color: Color.fromARGB(255, 220, 217, 217),
+          //     offset: Offset(
+          //       5.0,
+          //       5.0,
+          //     ),
+          //     blurRadius: 10.0,
+          //     spreadRadius: 2.0,
+          //   ), //BoxShadow
+          //   BoxShadow(
+          //     color: Color.fromARGB(255, 125, 124, 124),
+          //     offset: Offset(0.0, 0.0),
+          //     blurRadius: 0.0,
+          //     spreadRadius: 0.0,
+          //   ), //BoxShadow
+          // ],
         ),
         height: 325,
         padding: const EdgeInsets.all(20),
@@ -362,23 +362,23 @@ class HomePageState extends State<HomePage> {
     return Container(
       decoration: const BoxDecoration(
         color: Color.fromARGB(255, 100, 126, 139),
-        boxShadow: [
-          BoxShadow(
-            color: Color.fromARGB(255, 220, 217, 217),
-            offset: Offset(
-              5.0,
-              5.0,
-            ),
-            blurRadius: 10.0,
-            spreadRadius: 2.0,
-          ), //BoxShadow
-          BoxShadow(
-            color: Color.fromARGB(255, 125, 124, 124),
-            offset: Offset(0.0, 0.0),
-            blurRadius: 0.0,
-            spreadRadius: 0.0,
-          ), //BoxShadow
-        ],
+        // boxShadow: [
+        //   BoxShadow(
+        //     color: Color.fromARGB(255, 220, 217, 217),
+        //     offset: Offset(
+        //       5.0,
+        //       5.0,
+        //     ),
+        //     blurRadius: 10.0,
+        //     spreadRadius: 2.0,
+        //   ), //BoxShadow
+        //   BoxShadow(
+        //     color: Color.fromARGB(255, 125, 124, 124),
+        //     offset: Offset(0.0, 0.0),
+        //     blurRadius: 0.0,
+        //     spreadRadius: 0.0,
+        //   ), //BoxShadow
+        // ],
       ),
       padding: const EdgeInsets.all(20),
       height: 325,
