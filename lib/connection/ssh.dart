@@ -1,10 +1,10 @@
 import 'dart:async';
+
 import 'dart:io';
 import 'package:dartssh2/dartssh2.dart';
 import 'package:flutter/foundation.dart';
 import 'package:liquid_galaxy_kiss_app/kml/kml.dart';
 import 'package:liquid_galaxy_kiss_app/kml/kmlGenerator.dart';
-import 'package:liquid_galaxy_kiss_app/kml/mykml.dart';
 import 'package:liquid_galaxy_kiss_app/utils/constants.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -64,6 +64,27 @@ class SSH {
     }
   }
 
+  disconnect(context) async {
+    final socket = await SSHSocket.connect(
+      _host,
+      int.parse(_port),
+    );
+    bool isAuthenticated = false;
+    _client = SSHClient(socket,
+        username: _username,
+        onPasswordRequest: () => _passwordOrKey,
+        onAuthenticated: () {
+          isAuthenticated = true;
+        },
+        keepAliveInterval: const Duration(seconds: 3600000000));
+    await Future.delayed(const Duration(seconds: 10));
+    if (isAuthenticated) {
+      _client?.close();
+    } else {
+      throw Exception('SSH Authentication failed');
+    }
+  }
+
   create_sftp() async {
     final sftp = await _client?.sftp();
     await sftp?.open('/var/www/html/connection.txt',
@@ -109,7 +130,6 @@ class SSH {
 
   Future<void> rebootLG() async {
     try {
-      print('Reached here out of nowhere');
       await connectToLG();
 
       for (var i = int.parse(_numberOfRigs); i > 0; i--) {
@@ -180,24 +200,6 @@ class SSH {
         print(e);
       }
     }
-  }
-
-  Future<SSHSession?> orbit_location() async {
-    try {
-      await connectToLG();
-      myKML mykml = myKML();
-      await mykml.createMyKML();
-
-      final res =
-          await _client?.execute('echo "playtour=Orbit" > /tmp/query.txt');
-      if (res != null) print('Orbit successful');
-      return res;
-    } catch (e) {
-      if (kDebugMode) {
-        print(e);
-      }
-    }
-    return null;
   }
 
   Future<SSHSession?> stopOrbit() async {

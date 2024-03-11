@@ -14,6 +14,7 @@ class HomePage extends StatefulWidget {
 
 class HomePageState extends State<HomePage> {
   bool orbitPlaying = false;
+  bool connectionStatus = false;
   double latitude = 26.41091658808481;
   double longitude = 80.33231151633366;
   double altitude = 1000;
@@ -68,6 +69,12 @@ class HomePageState extends State<HomePage> {
   }
 
   @override
+  void dispose() {
+    ssh.disconnect(context);
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
@@ -75,7 +82,7 @@ class HomePageState extends State<HomePage> {
                 style: TextStyle(color: Colors.black, fontFamily: 'Serif')),
             backgroundColor: const Color.fromRGBO(227, 224, 224, 1),
             actions: <Widget>[
-              ConnectionFlag(connectionStatus: connection),
+              ConnectionFlag(connectionStatus: connectionStatus),
               PopupMenuButton(
                 itemBuilder: (context) => [
                   PopupMenuItem(
@@ -86,8 +93,10 @@ class HomePageState extends State<HomePage> {
                           builder: (context) => const ConnectScreen(),
                         ),
                       );
-                      setState(() async {
-                        await _connectToLG();
+                      setState(() {
+                        if (connection) {
+                          connectionStatus = true;
+                        }
                       });
                     },
                   ),
@@ -110,128 +119,108 @@ class HomePageState extends State<HomePage> {
                   image: AssetImage("assets/images/space.png"),
                   fit: BoxFit.cover),
             ),
-            child: Expanded(
-                child: Container(
-                    padding: const EdgeInsets.all(10),
-                    child: Column(children: [
-                      Expanded(
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Column1(context),
-                              const SizedBox(
-                                width: 20,
-                              ),
-                              Column2(context)
-                            ]),
-                      ),
-                      // const SizedBox(
-                      //   height: 20,
-                      // ),
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Container(
-                                padding: const EdgeInsets.all(10),
-                                height: 100,
-                                width: 350,
-                                decoration: const BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black,
-                                      offset: Offset(
-                                        5.0,
-                                        5.0,
-                                      ),
-                                      blurRadius: 10.0,
-                                      spreadRadius: 2.0,
-                                    ), //BoxShadow
-                                    BoxShadow(
-                                      color: Colors.white,
-                                      offset: Offset(0.0, 0.0),
-                                      blurRadius: 0.0,
-                                      spreadRadius: 0.0,
-                                    ), //BoxShadow
-                                  ],
-                                  color: Color.fromRGBO(207, 238, 235, 1),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(25)),
+            child: Container(
+                padding: const EdgeInsets.all(30),
+                child: Column(children: [
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Column1(context),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        Column2(context)
+                      ]),
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Container(
+                            padding: const EdgeInsets.all(10),
+                            height: 100,
+                            width: 350,
+                            decoration: const BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black,
+                                  offset: Offset(
+                                    5.0,
+                                    5.0,
+                                  ),
+                                  blurRadius: 10.0,
+                                  spreadRadius: 2.0,
+                                ), //BoxShadow
+                                BoxShadow(
+                                  color: Colors.white,
+                                  offset: Offset(0.0, 0.0),
+                                  blurRadius: 0.0,
+                                  spreadRadius: 0.0,
+                                ), //BoxShadow
+                              ],
+                              color: Color.fromRGBO(207, 238, 235, 1),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(25)),
+                            ),
+                            child: TextButton(
+                                child: const Text(
+                                  'PRINT HTML BUBBLE',
+                                  style: TextStyle(
+                                      fontSize: 25,
+                                      fontFamily: 'Serif',
+                                      color: Colors.black),
                                 ),
-                                child: TextButton(
-                                    child: const Text(
-                                      'PRINT HTML BUBBLE',
-                                      style: TextStyle(
-                                          fontSize: 25,
-                                          fontFamily: 'Serif',
-                                          color: Colors.black),
-                                    ),
-                                    onPressed: () async {
-                                      await ssh.renderInSlave(context);
-                                    })),
-                            const SizedBox(width: 50),
-                            Container(
-                                padding: const EdgeInsets.all(10),
-                                height: 100,
-                                width: 350,
-                                decoration: const BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black,
-                                      offset: Offset(
-                                        5.0,
-                                        5.0,
-                                      ),
-                                      blurRadius: 10.0,
-                                      spreadRadius: 2.0,
-                                    ), //BoxShadow
-                                    BoxShadow(
-                                      color: Colors.white,
-                                      offset: Offset(0.0, 0.0),
-                                      blurRadius: 0.0,
-                                      spreadRadius: 0.0,
-                                    ),
-                                    //BoxShadow
-                                  ],
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(25)),
-                                  color: Color.fromRGBO(207, 238, 235, 1),
+                                onPressed: () async {
+                                  await ssh.renderInSlave(context);
+                                })),
+                        const SizedBox(width: 50),
+                        Container(
+                            padding: const EdgeInsets.all(10),
+                            height: 100,
+                            width: 350,
+                            decoration: const BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black,
+                                  offset: Offset(
+                                    5.0,
+                                    5.0,
+                                  ),
+                                  blurRadius: 10.0,
+                                  spreadRadius: 2.0,
+                                ), //BoxShadow
+                                BoxShadow(
+                                  color: Colors.white,
+                                  offset: Offset(0.0, 0.0),
+                                  blurRadius: 0.0,
+                                  spreadRadius: 0.0,
                                 ),
-                                child: TextButton(
-                                    child: const Text(
-                                      'CLEAN LOGO',
-                                      style: TextStyle(
-                                          fontSize: 25,
-                                          fontFamily: 'Serif',
-                                          color: Colors.black),
-                                    ),
-                                    onPressed: () async {
-                                      await ssh.cleanSlaves(context);
-                                    })),
-                          ])
-                    ])))));
+                                //BoxShadow
+                              ],
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(25)),
+                              color: Color.fromRGBO(207, 238, 235, 1),
+                            ),
+                            child: TextButton(
+                                child: const Text(
+                                  'CLEAN LOGO',
+                                  style: TextStyle(
+                                      fontSize: 25,
+                                      fontFamily: 'Serif',
+                                      color: Colors.black),
+                                ),
+                                onPressed: () async {
+                                  await ssh.cleanSlaves(context);
+                                })),
+                      ])
+                ]))));
   }
 
   Widget Column1(BuildContext context) {
     return Container(
         decoration: const BoxDecoration(
           color: Color.fromARGB(255, 100, 126, 139),
-          // boxShadow: [
-          //   BoxShadow(
-          //     color: Color.fromARGB(255, 220, 217, 217),
-          //     offset: Offset(
-          //       5.0,
-          //       5.0,
-          //     ),
-          //     blurRadius: 10.0,
-          //     spreadRadius: 2.0,
-          //   ), //BoxShadow
-          //   BoxShadow(
-          //     color: Color.fromARGB(255, 125, 124, 124),
-          //     offset: Offset(0.0, 0.0),
-          //     blurRadius: 0.0,
-          //     spreadRadius: 0.0,
-          //   ), //BoxShadow
-          // ],
         ),
         height: 325,
         padding: const EdgeInsets.all(20),
@@ -308,9 +297,6 @@ class HomePageState extends State<HomePage> {
                           TextStyle(fontFamily: 'Serif', color: Colors.black),
                     ),
                     onPressed: () async {
-                      // await ssh.flyToOrbit(context, 26.41091658808481,
-                      //     80.33231151633366, 10, 66.768762, 1736.948935);
-                      await ssh.orbit_location();
                       await orbitPlay();
                     })),
           ]),
@@ -362,23 +348,6 @@ class HomePageState extends State<HomePage> {
     return Container(
       decoration: const BoxDecoration(
         color: Color.fromARGB(255, 100, 126, 139),
-        // boxShadow: [
-        //   BoxShadow(
-        //     color: Color.fromARGB(255, 220, 217, 217),
-        //     offset: Offset(
-        //       5.0,
-        //       5.0,
-        //     ),
-        //     blurRadius: 10.0,
-        //     spreadRadius: 2.0,
-        //   ), //BoxShadow
-        //   BoxShadow(
-        //     color: Color.fromARGB(255, 125, 124, 124),
-        //     offset: Offset(0.0, 0.0),
-        //     blurRadius: 0.0,
-        //     spreadRadius: 0.0,
-        //   ), //BoxShadow
-        // ],
       ),
       padding: const EdgeInsets.all(20),
       height: 325,
