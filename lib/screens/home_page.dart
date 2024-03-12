@@ -82,7 +82,7 @@ class HomePageState extends State<HomePage> {
                 style: TextStyle(color: Colors.black, fontFamily: 'Serif')),
             backgroundColor: const Color.fromRGBO(227, 224, 224, 1),
             actions: <Widget>[
-              ConnectionFlag(connectionStatus: connectionStatus),
+              ConnectionFlag(connectionStatus: connection),
               PopupMenuButton(
                 itemBuilder: (context) => [
                   PopupMenuItem(

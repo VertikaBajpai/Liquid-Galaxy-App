@@ -95,7 +95,6 @@ class SSH {
 
   Future<SSHSession?> searchplace(String place) async {
     try {
-      await connectToLG();
       if (_client == null) {
         if (kDebugMode) {
           print('SSH client is not initialized.');
@@ -118,7 +117,6 @@ class SSH {
 
   Future<void> shutdownLG() async {
     try {
-      await connectToLG();
       for (var i = int.parse(_numberOfRigs); i >= 0; i--) {
         await _client?.run(
             'sshpass -p $_passwordOrKey ssh -t lg$i "echo $_passwordOrKey | sudo -S poweroff"');
@@ -235,7 +233,6 @@ class SSH {
   flyToOrbit(context, double latitude, double longitude, double altitude,
       double zoom, double tilt, double bearing) async {
     try {
-      await connectToLG();
       await _client?.run(
           'echo "flytoview=${KMLGenerator.orbitLookAtLinear(latitude, longitude, altitude, zoom, tilt, bearing)}" > /tmp/query.txt');
     } catch (error) {
@@ -379,7 +376,7 @@ class SSH {
 </Document>
 </kml>
  ''';
-      await connectToLG();
+
       await _client!
           .execute("echo '$openLogoKML' > /var/www/html/kml/slave_2.kml");
     } catch (e) {
@@ -389,7 +386,6 @@ class SSH {
 
   cleanSlaves(context) async {
     try {
-      await connectToLG();
       for (var i = 2; i <= int.parse(_numberOfRigs); i++) {
         await _client?.run("echo '' > /var/www/html/kml/slave_$i.kml");
       }

@@ -84,7 +84,7 @@ class _ConnectScreenState extends State<ConnectScreen> {
                 Navigator.pop(context);
               }),
           backgroundColor: Color.fromRGBO(227, 224, 224, 1),
-          actions: <Widget>[ConnectionFlag(connectionStatus: connectionStatus)],
+          actions: <Widget>[ConnectionFlag(connectionStatus: connection)],
         ),
         body: Container(
             width: double.infinity,
