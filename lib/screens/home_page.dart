@@ -93,8 +93,9 @@ class HomePageState extends State<HomePage> {
                           builder: (context) => const ConnectScreen(),
                         ),
                       );
-                      setState(() {
-                        if (connection) {
+                      setState(() async {
+                        bool? connect = await ssh.connectToLG();
+                        if (connect == true) {
                           connectionStatus = true;
                         }
                       });
