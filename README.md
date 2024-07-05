@@ -1,4 +1,4 @@
-![image](https://github.com/VertikaBajpai/Liquid-Galaxy-App/assets/119621037/8dab6789-8def-4907-80a7-1be3d6163c64)# Liquid_galaxy_App
+# Liquid_galaxy_App
 
 A flutter based Simple App for the Liquid Galaxy KISS App Contest , which uses basic widgets and performs simple operations with the Liquid galaxy rig.
 
