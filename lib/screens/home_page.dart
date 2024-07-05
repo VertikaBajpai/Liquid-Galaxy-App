@@ -76,146 +76,150 @@ class HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-            title: const Text('Liquid Galaxy Functionalities',
-                style: TextStyle(color: Colors.black, fontFamily: 'Serif')),
-            backgroundColor: const Color.fromRGBO(227, 224, 224, 1),
-            actions: <Widget>[
-              ConnectionFlag(connectionStatus: connection),
-              PopupMenuButton(
-                itemBuilder: (context) => [
-                  PopupMenuItem(
-                    child: const Text('Connect'),
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => const ConnectScreen(),
-                        ),
-                      );
-                      setState(() async {
-                        bool? connect = await ssh.connectToLG();
-                        if (connect == true) {
-                          connectionStatus = true;
-                        }
-                      });
-                    },
-                  ),
-                  PopupMenuItem(
-                    child: const Text('About'),
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => const AboutPage(),
-                        ),
-                      );
-                    },
-                  )
-                ],
-              ),
-            ]),
-        body: DecoratedBox(
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage("assets/images/space.png"),
-                  fit: BoxFit.cover),
-            ),
-            child: Container(
-                padding: const EdgeInsets.all(30),
-                child: Column(children: [
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Column1(context),
-                        const SizedBox(
-                          width: 20,
-                        ),
-                        Column2(context)
-                      ]),
-                  const SizedBox(
-                    height: 50,
-                  ),
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Container(
-                            padding: const EdgeInsets.all(10),
-                            height: 100,
-                            width: 350,
-                            decoration: const BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black,
-                                  offset: Offset(
-                                    5.0,
-                                    5.0,
-                                  ),
-                                  blurRadius: 10.0,
-                                  spreadRadius: 2.0,
-                                ), //BoxShadow
-                                BoxShadow(
-                                  color: Colors.white,
-                                  offset: Offset(0.0, 0.0),
-                                  blurRadius: 0.0,
-                                  spreadRadius: 0.0,
-                                ), //BoxShadow
-                              ],
-                              color: Color.fromRGBO(207, 238, 235, 1),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(25)),
+    return SafeArea(
+      child: Scaffold(
+          appBar: AppBar(
+              title: const Text('Liquid Galaxy Functionalities',
+                  style: TextStyle(color: Colors.black, fontFamily: 'Serif')),
+              backgroundColor: const Color.fromRGBO(227, 224, 224, 1),
+              actions: <Widget>[
+                ConnectionFlag(connectionStatus: connection),
+                PopupMenuButton(
+                  itemBuilder: (context) => [
+                    PopupMenuItem(
+                      child: const Text('Connect'),
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const ConnectScreen(),
+                          ),
+                        );
+                        setState(() async {
+                          bool? connect = await ssh.connectToLG();
+                          if (connect == true) {
+                            connectionStatus = true;
+                          }
+                        });
+                      },
+                    ),
+                    PopupMenuItem(
+                      child: const Text('About'),
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const AboutPage(),
+                          ),
+                        );
+                      },
+                    )
+                  ],
+                ),
+              ]),
+          body: SafeArea(
+            child: DecoratedBox(
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage("assets/images/space.png"),
+                      fit: BoxFit.cover),
+                ),
+                child: Container(
+                    padding: const EdgeInsets.all(30),
+                    child: Column(children: [
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Column1(context),
+                            const SizedBox(
+                              width: 20,
                             ),
-                            child: TextButton(
-                                child: const Text(
-                                  'PRINT HTML BUBBLE',
-                                  style: TextStyle(
-                                      fontSize: 25,
-                                      fontFamily: 'Serif',
-                                      color: Colors.black),
+                            Column2(context)
+                          ]),
+                      const SizedBox(
+                        height: 50,
+                      ),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Container(
+                                padding: const EdgeInsets.all(10),
+                                height: 80,
+                                width: 350,
+                                decoration: const BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black,
+                                      offset: Offset(
+                                        5.0,
+                                        5.0,
+                                      ),
+                                      blurRadius: 10.0,
+                                      spreadRadius: 2.0,
+                                    ), //BoxShadow
+                                    BoxShadow(
+                                      color: Colors.white,
+                                      offset: Offset(0.0, 0.0),
+                                      blurRadius: 0.0,
+                                      spreadRadius: 0.0,
+                                    ), //BoxShadow
+                                  ],
+                                  color: Color.fromRGBO(207, 238, 235, 1),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(25)),
                                 ),
-                                onPressed: () async {
-                                  await ssh.renderInSlave(context);
-                                })),
-                        const SizedBox(width: 50),
-                        Container(
-                            padding: const EdgeInsets.all(10),
-                            height: 100,
-                            width: 350,
-                            decoration: const BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black,
-                                  offset: Offset(
-                                    5.0,
-                                    5.0,
-                                  ),
-                                  blurRadius: 10.0,
-                                  spreadRadius: 2.0,
-                                ), //BoxShadow
-                                BoxShadow(
-                                  color: Colors.white,
-                                  offset: Offset(0.0, 0.0),
-                                  blurRadius: 0.0,
-                                  spreadRadius: 0.0,
+                                child: TextButton(
+                                    child: const Text(
+                                      'PRINT HTML BUBBLE',
+                                      style: TextStyle(
+                                          fontSize: 25,
+                                          fontFamily: 'Serif',
+                                          color: Colors.black),
+                                    ),
+                                    onPressed: () async {
+                                      await ssh.renderInSlave(context);
+                                    })),
+                            const SizedBox(width: 50),
+                            Container(
+                                padding: const EdgeInsets.all(10),
+                                height: 80,
+                                width: 350,
+                                decoration: const BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black,
+                                      offset: Offset(
+                                        5.0,
+                                        5.0,
+                                      ),
+                                      blurRadius: 10.0,
+                                      spreadRadius: 2.0,
+                                    ), //BoxShadow
+                                    BoxShadow(
+                                      color: Colors.white,
+                                      offset: Offset(0.0, 0.0),
+                                      blurRadius: 0.0,
+                                      spreadRadius: 0.0,
+                                    ),
+                                    //BoxShadow
+                                  ],
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(25)),
+                                  color: Color.fromRGBO(207, 238, 235, 1),
                                 ),
-                                //BoxShadow
-                              ],
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(25)),
-                              color: Color.fromRGBO(207, 238, 235, 1),
-                            ),
-                            child: TextButton(
-                                child: const Text(
-                                  'CLEAN LOGO',
-                                  style: TextStyle(
-                                      fontSize: 25,
-                                      fontFamily: 'Serif',
-                                      color: Colors.black),
-                                ),
-                                onPressed: () async {
-                                  await ssh.cleanSlaves(context);
-                                })),
-                      ])
-                ]))));
+                                child: TextButton(
+                                    child: const Text(
+                                      'CLEAN LOGO',
+                                      style: TextStyle(
+                                          fontSize: 25,
+                                          fontFamily: 'Serif',
+                                          color: Colors.black),
+                                    ),
+                                    onPressed: () async {
+                                      await ssh.cleanSlaves(context);
+                                    })),
+                          ])
+                    ]))),
+          )),
+    );
   }
 
   Widget Column1(BuildContext context) {

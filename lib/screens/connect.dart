@@ -71,231 +71,41 @@ class _ConnectScreenState extends State<ConnectScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text(
-            'Connect to Liquid Galaxy',
-            style: TextStyle(color: Colors.black, fontFamily: 'Serif'),
+    return SafeArea(
+      child: Scaffold(
+          appBar: AppBar(
+            title: const Text(
+              'Connect to Liquid Galaxy',
+              style: TextStyle(color: Colors.black, fontFamily: 'Serif'),
+            ),
+            leading: IconButton(
+                icon: const Icon(Icons.arrow_back),
+                color: Colors.black,
+                onPressed: () {
+                  Navigator.pop(context);
+                }),
+            backgroundColor: Color.fromRGBO(227, 224, 224, 1),
+            actions: <Widget>[ConnectionFlag(connectionStatus: connection)],
           ),
-          leading: IconButton(
-              icon: const Icon(Icons.arrow_back),
-              color: Colors.black,
-              onPressed: () {
-                Navigator.pop(context);
-              }),
-          backgroundColor: Color.fromRGBO(227, 224, 224, 1),
-          actions: <Widget>[ConnectionFlag(connectionStatus: connection)],
-        ),
-        body: Container(
-            width: double.infinity,
-            height: double.infinity,
-            padding: const EdgeInsets.all(30),
-            decoration: const BoxDecoration(
-                gradient: LinearGradient(begin: Alignment.topCenter, colors: [
-              Color.fromARGB(255, 166, 166, 166),
-              Color.fromARGB(255, 78, 76, 76),
-            ])),
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.all(50),
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(14),
-                        decoration: const BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black,
-                              offset: Offset(
-                                5.0,
-                                5.0,
-                              ),
-                              blurRadius: 10.0,
-                              spreadRadius: 2.0,
-                            ), //BoxShadow
-                            BoxShadow(
-                              color: Colors.white,
-                              offset: Offset(0.0, 0.0),
-                              blurRadius: 0.0,
-                              spreadRadius: 0.0,
-                            ), //BoxShadow
-                          ],
-                          color: Colors.white,
-                        ),
-                        child: TextField(
-                          controller: ipController,
-                          decoration: const InputDecoration(
-                            labelText: 'IP address',
-                            hintText: 'Enter Master IP',
-                            border: UnderlineInputBorder(),
-                          ),
-                          keyboardType: TextInputType.number,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Container(
-                        padding: const EdgeInsets.all(14),
-                        decoration: const BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black,
-                              offset: Offset(
-                                5.0,
-                                5.0,
-                              ),
-                              blurRadius: 10.0,
-                              spreadRadius: 2.0,
-                            ), //BoxShadow
-                            BoxShadow(
-                              color: Colors.white,
-                              offset: Offset(0.0, 0.0),
-                              blurRadius: 0.0,
-                              spreadRadius: 0.0,
-                            ), //BoxShadow
-                          ],
-                          color: Colors.white,
-                        ),
-                        child: TextField(
-                          controller: usernameController,
-                          decoration: const InputDecoration(
-                            // prefixIcon: Icon(Icons.computer),
-                            labelText: 'LG Username',
-                            hintText: 'Enter username',
-                            border: UnderlineInputBorder(),
-                          ),
-                          keyboardType: TextInputType.text,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Container(
-                        padding: const EdgeInsets.all(14),
-                        decoration: const BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black,
-                              offset: Offset(
-                                5.0,
-                                5.0,
-                              ),
-                              blurRadius: 10.0,
-                              spreadRadius: 2.0,
-                            ), //BoxShadow
-                            BoxShadow(
-                              color: Colors.white,
-                              offset: Offset(0.0, 0.0),
-                              blurRadius: 0.0,
-                              spreadRadius: 0.0,
-                            ), //BoxShadow
-                          ],
-                          color: Colors.white,
-                        ),
-                        child: TextField(
-                          controller: passwordController,
-                          obscureText: !passwordVisible,
-                          decoration: InputDecoration(
-                            // prefixIcon: Icon(Icons.computer),
-                            labelText: 'LG Password',
-                            hintText: 'Enter password',
-                            border: const UnderlineInputBorder(),
-
-                            suffixIcon: IconButton(
-                              icon: Icon(passwordVisible == false
-                                  ? Icons.visibility
-                                  : Icons.visibility_off),
-                              onPressed: () {
-                                setState(
-                                  () {
-                                    passwordVisible = !passwordVisible;
-                                  },
-                                );
-                              },
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 25,
-                      ),
-                      Container(
-                        padding: const EdgeInsets.all(14),
-                        decoration: const BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black,
-                              offset: Offset(
-                                5.0,
-                                5.0,
-                              ),
-                              blurRadius: 10.0,
-                              spreadRadius: 2.0,
-                            ), //BoxShadow
-                            BoxShadow(
-                              color: Colors.white,
-                              offset: Offset(0.0, 0.0),
-                              blurRadius: 0.0,
-                              spreadRadius: 0.0,
-                            ), //BoxShadow
-                          ],
-                          color: Colors.white,
-                        ),
-                        child: TextField(
-                          controller: portController,
-                          decoration: const InputDecoration(
-                            //   prefixIcon: Icon(Icons.computer),
-                            labelText: 'SSH Port',
-                            hintText: 'Enter port number',
-                            border: UnderlineInputBorder(),
-                          ),
-                          keyboardType: TextInputType.number,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Container(
-                        padding: const EdgeInsets.all(14),
-                        decoration: const BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black,
-                              offset: Offset(
-                                5.0,
-                                5.0,
-                              ),
-                              blurRadius: 10.0,
-                              spreadRadius: 2.0,
-                            ), //BoxShadow
-                            BoxShadow(
-                              color: Colors.white,
-                              offset: Offset(0.0, 0.0),
-                              blurRadius: 0.0,
-                              spreadRadius: 0.0,
-                            ), //BoxShadow
-                          ],
-                          color: Colors.white,
-                        ),
-                        child: TextField(
-                          controller: no_of_rigs_Controller,
-                          decoration: const InputDecoration(
-                            labelText: 'Number of LG rigs',
-                            hintText: 'Enter no of rigs',
-                            border: UnderlineInputBorder(),
-                          ),
-                          // keyboardType: TextInputType.number,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 50,
-                      ),
-                      Container(
+          body: Container(
+              width: double.infinity,
+              height: double.infinity,
+              padding: const EdgeInsets.all(30),
+              decoration: const BoxDecoration(
+                  gradient: LinearGradient(begin: Alignment.topCenter, colors: [
+                Color.fromARGB(255, 166, 166, 166),
+                Color.fromARGB(255, 78, 76, 76),
+              ])),
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(50),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(14),
                           decoration: const BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(20)),
                             boxShadow: [
                               BoxShadow(
                                 color: Colors.black,
@@ -313,38 +123,231 @@ class _ConnectScreenState extends State<ConnectScreen> {
                                 spreadRadius: 0.0,
                               ), //BoxShadow
                             ],
+                            color: Colors.white,
                           ),
-                          width: 10000,
-                          height: 50,
-                          child: ElevatedButton(
-                            onPressed: () async {
-                              await saveSettings();
-                              ssh = SSH();
-                              bool? connect = await ssh.connectToLG();
+                          child: TextField(
+                            controller: ipController,
+                            decoration: const InputDecoration(
+                              labelText: 'IP address',
+                              hintText: 'Enter Master IP',
+                              border: UnderlineInputBorder(),
+                            ),
+                            keyboardType: TextInputType.number,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Container(
+                          padding: const EdgeInsets.all(14),
+                          decoration: const BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black,
+                                offset: Offset(
+                                  5.0,
+                                  5.0,
+                                ),
+                                blurRadius: 10.0,
+                                spreadRadius: 2.0,
+                              ), //BoxShadow
+                              BoxShadow(
+                                color: Colors.white,
+                                offset: Offset(0.0, 0.0),
+                                blurRadius: 0.0,
+                                spreadRadius: 0.0,
+                              ), //BoxShadow
+                            ],
+                            color: Colors.white,
+                          ),
+                          child: TextField(
+                            controller: usernameController,
+                            decoration: const InputDecoration(
+                              // prefixIcon: Icon(Icons.computer),
+                              labelText: 'LG Username',
+                              hintText: 'Enter username',
+                              border: UnderlineInputBorder(),
+                            ),
+                            keyboardType: TextInputType.text,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Container(
+                          padding: const EdgeInsets.all(14),
+                          decoration: const BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black,
+                                offset: Offset(
+                                  5.0,
+                                  5.0,
+                                ),
+                                blurRadius: 10.0,
+                                spreadRadius: 2.0,
+                              ), //BoxShadow
+                              BoxShadow(
+                                color: Colors.white,
+                                offset: Offset(0.0, 0.0),
+                                blurRadius: 0.0,
+                                spreadRadius: 0.0,
+                              ), //BoxShadow
+                            ],
+                            color: Colors.white,
+                          ),
+                          child: TextField(
+                            controller: passwordController,
+                            obscureText: !passwordVisible,
+                            decoration: InputDecoration(
+                              // prefixIcon: Icon(Icons.computer),
+                              labelText: 'LG Password',
+                              hintText: 'Enter password',
+                              border: const UnderlineInputBorder(),
 
-                              if (connect == true) {
-                                setState(() {
-                                  if (kDebugMode) {
-                                    print('Connected');
-                                  }
-                                  connectionStatus = true;
-                                });
-                              }
-                            },
-                            style: const ButtonStyle(
-                              backgroundColor: MaterialStatePropertyAll(
-                                Color.fromARGB(255, 227, 219, 219),
+                              suffixIcon: IconButton(
+                                icon: Icon(passwordVisible == false
+                                    ? Icons.visibility
+                                    : Icons.visibility_off),
+                                onPressed: () {
+                                  setState(
+                                    () {
+                                      passwordVisible = !passwordVisible;
+                                    },
+                                  );
+                                },
                               ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 25,
+                        ),
+                        Container(
+                          padding: const EdgeInsets.all(14),
+                          decoration: const BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black,
+                                offset: Offset(
+                                  5.0,
+                                  5.0,
+                                ),
+                                blurRadius: 10.0,
+                                spreadRadius: 2.0,
+                              ), //BoxShadow
+                              BoxShadow(
+                                color: Colors.white,
+                                offset: Offset(0.0, 0.0),
+                                blurRadius: 0.0,
+                                spreadRadius: 0.0,
+                              ), //BoxShadow
+                            ],
+                            color: Colors.white,
+                          ),
+                          child: TextField(
+                            controller: portController,
+                            decoration: const InputDecoration(
+                              //   prefixIcon: Icon(Icons.computer),
+                              labelText: 'SSH Port',
+                              hintText: 'Enter port number',
+                              border: UnderlineInputBorder(),
+                            ),
+                            keyboardType: TextInputType.number,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Container(
+                          padding: const EdgeInsets.all(14),
+                          decoration: const BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black,
+                                offset: Offset(
+                                  5.0,
+                                  5.0,
+                                ),
+                                blurRadius: 10.0,
+                                spreadRadius: 2.0,
+                              ), //BoxShadow
+                              BoxShadow(
+                                color: Colors.white,
+                                offset: Offset(0.0, 0.0),
+                                blurRadius: 0.0,
+                                spreadRadius: 0.0,
+                              ), //BoxShadow
+                            ],
+                            color: Colors.white,
+                          ),
+                          child: TextField(
+                            controller: no_of_rigs_Controller,
+                            decoration: const InputDecoration(
+                              labelText: 'Number of LG rigs',
+                              hintText: 'Enter no of rigs',
+                              border: UnderlineInputBorder(),
+                            ),
+                            // keyboardType: TextInputType.number,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 50,
+                        ),
+                        Container(
+                            decoration: const BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20)),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black,
+                                  offset: Offset(
+                                    5.0,
+                                    5.0,
+                                  ),
+                                  blurRadius: 10.0,
+                                  spreadRadius: 2.0,
+                                ), //BoxShadow
+                                BoxShadow(
+                                  color: Colors.white,
+                                  offset: Offset(0.0, 0.0),
+                                  blurRadius: 0.0,
+                                  spreadRadius: 0.0,
+                                ), //BoxShadow
+                              ],
+                            ),
+                            width: 10000,
+                            height: 50,
+                            child: ElevatedButton(
+                              onPressed: () async {
+                                await saveSettings();
+                                ssh = SSH();
+                                bool? connect = await ssh.connectToLG();
 
-                              // shape:MaterialStatePropertyAll(Rounded)
-                            ),
-                            child: const Text(
-                              'Connect',
-                              style: TextStyle(color: Colors.black),
-                            ),
-                          ))
-                    ]),
-              ),
-            )));
+                                if (connect == true) {
+                                  setState(() {
+                                    if (kDebugMode) {
+                                      print('Connected');
+                                    }
+                                    connectionStatus = true;
+                                  });
+                                }
+                              },
+                              style: const ButtonStyle(
+                                backgroundColor: MaterialStatePropertyAll(
+                                  Color.fromARGB(255, 227, 219, 219),
+                                ),
+
+                                // shape:MaterialStatePropertyAll(Rounded)
+                              ),
+                              child: const Text(
+                                'Connect',
+                                style: TextStyle(color: Colors.black),
+                              ),
+                            ))
+                      ]),
+                ),
+              ))),
+    );
   }
 }
