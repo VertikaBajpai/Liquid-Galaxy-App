@@ -7,4 +7,8 @@ A flutter based Simple App for the Liquid Galaxy KISS App Contest , which uses b
 * It locates the homecity and orbits around it.
 * It also has an functionality to display HTML Bubble on the rightmost slave.
 
-  ## Hope you will enjoy playing with Liquid galaxy :) 
+  ## Hope you will enjoy playing with Liquid galaxy :)
+  
+
+
+![image](https://github.com/VertikaBajpai/Liquid-Galaxy-App/assets/119621037/0a7b26d2-0413-4d2d-9d89-6d6edec17c59)
